@@ -25,10 +25,6 @@
 #define _BR  2
 #define _MOV 3
 
-// aliases
-#define OS_LSFT OSM(MOD_LSFT)
-#define OS_RSFT OSM(MOD_RSFT)
-
 // layer switches
 #define F_DUAL LT(_BR, KC_F)
 #define J_DUAL LT(_MOV, KC_J)
@@ -37,13 +33,42 @@
 enum {
   TD_MINS_UND = 0,
   TD_ASTR_AMPR,
-  TD_EQL_PLUS
+  TD_EQL_PLUS,
+  TD_LSFT_LCTL
 
 };
 
 #define TD_MINS TD(TD_MINS_UND)
 #define TD_ASTR TD(TD_ASTR_AMPR)
 #define TD_EQL  TD(TD_EQL_PLUS)
+#define TD_LSFT TD(TD_LSFT_LCTL)
+
+// Tap dance functions
+void dance_lsft_finished(qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    register_code(KC_LSFT);
+  } else {
+    register_code(KC_LSFT);
+    register_code(KC_LCTL);
+  }
+}
+
+void dance_lsft_reset(qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    unregister_code(KC_LSFT);
+  } else {
+    unregister_code(KC_LSFT);
+    unregister_code(KC_LCTL);
+  }
+}
+
+//Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_MINS_UND]  = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_UNDS),
+  [TD_ASTR_AMPR] = ACTION_TAP_DANCE_DOUBLE(KC_ASTR, KC_AMPR),
+  [TD_EQL_PLUS]  = ACTION_TAP_DANCE_DOUBLE(KC_EQL,  KC_PLUS),
+  [TD_LSFT_LCTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_lsft_finished, dance_lsft_reset)
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -67,30 +92,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC, KC_BSLS, KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT},
         {KC_CAPS, KC_A,    KC_S,    KC_D,    F_DUAL,  KC_G,    KC_HOME, KC_DEL,  KC_PGUP, KC_H,    J_DUAL,  KC_K,    KC_L,    KC_SCLN, KC_ENT},
         {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_UP,   KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT},
-        {KC_LCTL, KC_LGUI, KC_LALT, KC_DEL,  KC_SPC,  KC_LSFT, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_ENT,  KC_BSPC, KC_RALT, MO(_FN), KC_RCTL},
+        {KC_LCTL, KC_LGUI, KC_LALT, KC_DEL,  KC_SPC,  TD_LSFT, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_ENT,  KC_BSPC, KC_RALT, MO(_FN), KC_RCTL},
     },
 
     /* FUNCTION
       * .--------------------------------------------------------------------------------------------------------------------------------------.
       * | F1     | F2     | F3     | F4     | F5     | F6     | NUM LK | P/     | P*     | F7     | F8     | F9     | F10    | F11    | F12    |
       * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
-      * | SELECT | CALC   | MYCOMP | MAIL   |        |        | P7     | P8     | P9     | -      |        |        | PR SCR | SCR LK | PR SCR |
+      * |        |        |        |        |        |        | P7     | P8     | P9     | -      |        |        |        |        |        |
       * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
-      * | PREV   | PLAY   | NEXT   | STOP   |        |        | P4     | P5     | P6     | +      |        |        |        |        |        |
+      * |        |        |        |        |        |        | P4     | P5     | P6     | +      |        |        |        |        |        |
       * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
-      * | VOL-   | MUTE   | VOL+   |        |        |        | P1     | P2     | P3     | PENT   |        |        |        |        |        |
+      * |        |        |        |        |        |        | P1     | P2     | P3     | PENT   |        |        | MUTE   | VOL DO | VOL UP |
       * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
-      * | RESET  |        |        |        |        |        | P0     |        | P.     | PENT   | PENT   |        |        | FN     |        |
+      * | RESET  |        |        |        |        |        | P0     | P0     | P.     | PENT   | PENT   |        |        | FN     |        |
       * '--------------------------------------------------------------------------------------------------------------------------------------'
  */
 
     [_FN] = {
         /* FUNCTION */
-        {KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_NLCK, KC_SLSH, KC_ASTR, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12},
-        {KC_MSEL, KC_CALC, _______, KC_MAIL, KC_SPC,  KC_SPC,  KC_P7,   KC_P8,   KC_P9,   KC_MINS, KC_SPC,  KC_SPC,  _______, _______, _______},
-        {KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_SPC,  KC_SPC,  KC_P6,   KC_P5,   KC_P4,   KC_PLUS, KC_SPC,  _______, KC_SPC,  KC_SPC,  KC_SPC},
-        {KC_VOLD, KC_MUTE, KC_VOLU, KC_APP,  KC_SPC,  KC_SPC,  KC_P3,   KC_P2,   KC_P1,   _______, KC_SPC,  KC_SPC,  KC_SPC,  _______, _______},
-        {RESET,   _______, _______, _______, KC_SPC,  KC_SPC,  KC_KP_0, _______, KC_PDOT, KC_PENT, _______, _______, _______, MO(_FN), _______},
+        {KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,    KC_F6,    KC_NLCK, KC_SLSH, KC_ASTR, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12},
+        {_______, _______, _______, _______, _______,  _______,  KC_P7,   KC_P8,   KC_P9,   KC_MINS, _______, _______, _______, _______, _______},
+        {_______, _______, _______, _______, _______,  _______,  KC_P6,   KC_P5,   KC_P4,   KC_PLUS, _______, _______, _______, _______, _______},
+        {_______, _______, _______, _______, _______,  _______,  KC_P3,   KC_P2,   KC_P1,   KC_PENT, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU},
+        {RESET,   _______, _______, _______, _______,  _______,  KC_KP_0, KC_KP_0, KC_PDOT, KC_PENT, _______, _______, _______, MO(_FN), _______},
     },
 
     /* Brackets
@@ -143,18 +168,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM fn_actions[] = {
 
 };
-
-//Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_MINS_UND]  = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_UNDS),
-  [TD_ASTR_AMPR] = ACTION_TAP_DANCE_DOUBLE(KC_ASTR, KC_AMPR),
-  [TD_EQL_PLUS]  = ACTION_TAP_DANCE_DOUBLE(KC_EQL,  KC_PLUS)
-};
-
-void matrix_init_user()
-{
-  capslock_led_off();
-  gp100_led_off();
-  gp103_led_off();
-  keycaps_led_off();
-}
