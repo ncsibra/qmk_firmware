@@ -10,9 +10,9 @@
 // tap-hold settings
 #define TH_DELAY 300
 
-#define TH_EVENTS_COUNT 15
+#define TH_EVENTS_COUNT 17
 #define TH_FIRST TH_1
-#define TH_LAST TH_V
+#define TH_LAST TH_S
 
 enum tap_hold_keys {
   TH_1 = SAFE_RANGE,
@@ -28,9 +28,12 @@ enum tap_hold_keys {
   TH_8,
   TH_9,
 
+  TH_BSPC,
+
   TH_X,
   TH_C,
   TH_V,
+  TH_S,
 };
 
 enum layers {
@@ -40,13 +43,9 @@ enum layers {
   _MOV
 };
 
-// enum tap_dance_indexes {
-//   TD_MINS_UND = 0,
-//   TD_ASTR_AMPR,
-//   TD_EQL_PLUS,
-//   TD_LSFT_LCTL,
-//   TD_RSFT_RCTL
-// };
+enum tap_dance_indexes {
+  TD_BSPC_QUOT = 0,
+};
 
 typedef struct {
     bool is_pressed;

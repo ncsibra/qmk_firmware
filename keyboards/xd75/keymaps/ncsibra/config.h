@@ -25,8 +25,10 @@
 #undef TAPPING_TERM
 #endif
 #define TAPPING_TERM 200
-#define RETRO_TAPPING
+// #define RETRO_TAPPING
 // #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
+#define LEADER_TIMEOUT 500
+#define PREVENT_STUCK_MODIFIERS
 
 #endif
