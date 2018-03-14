@@ -38,8 +38,8 @@ enum tap_hold_keys {
 
 enum layers {
   _QW = 0,
-  _FN, 
-  _BR, 
+  _FN,
+  _BR,
   _MOV
 };
 
