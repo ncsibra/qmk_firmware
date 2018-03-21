@@ -31,4 +31,4 @@ NKRO_ENABLE      = yes      # Nkey Rollover - if this doesn't work, see here: ht
 COMMAND_ENABLE   = yes      # Commands for debug and configuration
 EXTRAKEY_ENABLE  = yes      # Audio control and System control(+450)
 
-TAP_DANCE_ENABLE = yes
+TAP_DANCE_ENABLE = no
