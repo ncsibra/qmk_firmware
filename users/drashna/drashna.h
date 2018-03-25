@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
-// Define layer names 
+// Define layer names
 #define _QWERTY 0
 #define _NUMLOCK 0
 #define _COLEMAK 1
@@ -177,8 +177,8 @@ enum {
 
 
 
-// Since our quirky block definitions are basically a list of comma separated 
-// arguments, we need a wrapper in order for these definitions to be 
+// Since our quirky block definitions are basically a list of comma separated
+// arguments, we need a wrapper in order for these definitions to be
 // expanded before being used as arguments to the LAYOUT_xxx macro.
 #define LAYOUT_ergodox_wrapper(...)   LAYOUT_ergodox(__VA_ARGS__)
 #define LAYOUT_ergodox_pretty_wrapper(...)   LAYOUT_ergodox_pretty(__VA_ARGS__)
@@ -193,7 +193,7 @@ enum {
 
 // NOTE: These are all the same length.  If you do a search/replace
 //       then you need to add/remove underscores to keep the
-//       lengths consistent. 
+//       lengths consistent.
 
 #define _________________QWERTY_L1_________________        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T
 #define _________________QWERTY_L2_________________        KC_A,    KC_S,    KC_D,    KC_F,    KC_G
