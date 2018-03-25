@@ -3,10 +3,6 @@
 
 #include "config_common.h"
 
-#define LEADER_TIMEOUT 500
-#define TAPPING_TOGGLE 2
-#define PREVENT_STUCK_MODIFIERS
-
 #define KEYMAP_USER( \
     K00, K01, K02, K03, K04, K05, K09, K0A, K0B, K0C, K0D, K0E,\
     K10, K11, K12, K13, K14, K15, K19, K1A, K1B, K1C, K1D, K1E,\

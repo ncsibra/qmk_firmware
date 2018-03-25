@@ -3,6 +3,15 @@
 
 #include "quantum.h"
 
+#ifdef LEADER_TIMEOUT
+#undef LEADER_TIMEOUT
+#endif
+
+#define LEADER_TIMEOUT 500
+#define TAPPING_TOGGLE 2
+#define TAPPING_TERM 200
+#define PREVENT_STUCK_MODIFIERS
+
 #define MOD_ACTIVE(mod) ((keyboard_report->mods & MOD_BIT(mod)) || ((get_oneshot_mods() & MOD_BIT(mod)) && !has_oneshot_mods_timed_out()))
 
 // increase readability
@@ -119,7 +128,7 @@ typedef enum {
     HELD,
 } taphold_state;
 
-void scan_tap_hold(taphold_state state);
+void matrix_scan_tap_hold(taphold_state state);
 bool process_record_user_taphold(uint16_t keycode, keyrecord_t *record);
 
 #endif

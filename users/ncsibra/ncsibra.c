@@ -44,7 +44,7 @@ static uint16_t prev_th_time = 0;
 
 bool process_record_user_taphold(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
-      scan_tap_hold(TAPPED);
+      matrix_scan_tap_hold(TAPPED);
   }
 
   if (keycode < TH_FIRST || keycode > TH_LAST) { return true; }
@@ -78,7 +78,7 @@ bool process_record_user_taphold(uint16_t keycode, keyrecord_t *record) {
   return false;
 }
 
-void scan_tap_hold(taphold_state state) {
+void matrix_scan_tap_hold(taphold_state state) {
   for (uint8_t index = 0 ; index < TH_EVENTS_COUNT ; ++index ) {
       taphold_t *th_event = &th_events[index];
       if (!th_event->is_pressed) { continue; }
@@ -93,11 +93,8 @@ void scan_tap_hold(taphold_state state) {
 
 LEADER_EXTERNS();
 void matrix_scan_user(void) {
-  scan_tap_hold(HELD);
-
-  // if (IS_LAYER_ON(_VIM) && VIM_LAST_KEY.pressed) {
-  //   VIM_LAST_KEY.op();
-  // }
+  matrix_scan_tap_hold(HELD);
+  matrix_scan_vim();
 
   LEADER_DICTIONARY() {
     leading = false;

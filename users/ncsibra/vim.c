@@ -4,9 +4,9 @@
 #define PRESS(keycode) register_code16(keycode)
 #define RELEASE(keycode) unregister_code16(keycode)
 
-static uint16_t vim_queue = KC_NO;
-static vim_operation_fn vim_last_operation;
-// static vim_move_state vim_last_key = { .pressed = false };
+static uint16_t queue = KC_NO;
+static vim_operation_fn last_operation;
+static vim_move_state last_move = { .pressed = false, .held = false, .timer = 0 };
 
 static void clear_shifted_state(void) {
   RELEASE(KC_LSFT);
@@ -26,19 +26,26 @@ static void CTRL(uint16_t keycode) {
 }
 
 /**
- * Sets the `vim_queue` variable to the incoming keycode.
+ * Sets the `queue` variable to the incoming keycode.
  * Pass `KC_NO` to cancel the operation.
  * @param keycode
  */
 static void VIM_LEADER(uint16_t keycode) {
-  vim_queue = keycode;
+  queue = keycode;
 }
 
 /**
  * Record the last function call, so we can recall it on dot command.
  */
 static void VIM_REC(vim_operation_fn op) {
-  vim_last_operation = op;
+  last_operation = op;
+  op();
+}
+
+static void VIM_MOVE(vim_operation_fn op) {
+  last_move.op = op;
+  last_move.pressed = true;
+  last_move.timer = timer_read();
   op();
 }
 
@@ -57,8 +64,8 @@ static void VIM_REC(vim_operation_fn op) {
  * Vim-like `.` command, only make sense for some function.
  */
 static void VIM_DOT_REPEAT(void) {
-  if (vim_last_operation) {
-    vim_last_operation();
+  if (last_operation) {
+    last_operation();
   }
 }
 
@@ -690,9 +697,10 @@ static void VIM_VISUAL_INNER_WORD(void) {
 bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
  if (IS_LAYER_ON(_VIM_N)) {
     if (!record->event.pressed) {
-      // if (vim_last_key.pressed) {
-      //   vim_last_key.pressed = false;
-      // }
+      if (last_move.pressed) {
+        last_move.pressed = false;
+        last_move.held = false;
+      }
       return false;
     }
 
@@ -705,44 +713,44 @@ bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
         return false;
 
       case VIM_B:
-        switch(vim_queue) {
-          case KC_NO: VIM_BACK(); break;
+        switch(queue) {
+          case KC_NO: VIM_MOVE(VIM_BACK); break;
           case VIM_C: VIM_CHANGE_BACK(); break;
           case VIM_D: VIM_DELETE_BACK(); break;
         }
         return false;
 
       case VIM_C:
-        switch(vim_queue) {
+        switch(queue) {
           case KC_NO: SHIFTED ? VIM_CHANGE_LINE() : VIM_LEADER(VIM_C); break;
           case VIM_C: VIM_CHANGE_WHOLE_LINE(); break;
         }
         return false;
 
       case VIM_D:
-        switch(vim_queue) {
+        switch(queue) {
           case KC_NO: SHIFTED ? VIM_DELETE_LINE() : VIM_LEADER(VIM_D); break;
           case VIM_D: VIM_REC(VIM_DELETE_WHOLE_LINE); break;
         }
         return false;
 
       case VIM_G:
-        switch (vim_queue) {
+        switch (queue) {
           case KC_NO: SHIFTED ? VIM_JUMP_END() : VIM_LEADER(VIM_G); break;
           case VIM_G: VIM_JUMP_HOME(); break;
         }
         return false;
 
       case VIM_H:
-        switch (vim_queue) {
-          case KC_NO: VIM_LEFT(); break;
+        switch (queue) {
+          case KC_NO: VIM_MOVE(VIM_LEFT); break;
           case VIM_C: VIM_CHANGE_LEFT(); break;
           case VIM_D: VIM_DELETE_LEFT(); break;
         }
         return false;
 
       case VIM_I:
-        switch (vim_queue) {
+        switch (queue) {
           case KC_NO: layer_move(_QWERTY); break;
           case VIM_C: VIM_LEADER(VIM_CI); break;
           case VIM_D: VIM_LEADER(VIM_DI); break;
@@ -750,15 +758,15 @@ bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
         return false;
 
       case VIM_J:
-        switch (vim_queue) {
-          case KC_NO: SHIFTED ? VIM_JOIN() : VIM_DOWN(); break;
+        switch (queue) {
+          case KC_NO: SHIFTED ? VIM_JOIN() : VIM_MOVE(VIM_DOWN); break;
           case VIM_C: VIM_CHANGE_DOWN(); break;
           case VIM_D: VIM_DELETE_DOWN(); break;
         }
         return false;
 
       case VIM_K:
-        switch (vim_queue) {
+        switch (queue) {
           case KC_NO: VIM_UP(); break;
           case VIM_C: VIM_CHANGE_UP(); break;
           case VIM_D: VIM_DELETE_UP(); break;
@@ -766,7 +774,7 @@ bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
         return false;
 
       case VIM_L:
-        switch (vim_queue) {
+        switch (queue) {
           case KC_NO: VIM_RIGHT(); break;
           case VIM_C: VIM_CHANGE_RIGHT(); break;
           case VIM_D: VIM_DELETE_RIGHT(); break;
@@ -789,7 +797,7 @@ bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
         return false;
 
       case VIM_W:
-        switch (vim_queue) {
+        switch (queue) {
           case KC_NO: VIM_WORD(); break;
           case VIM_C: VIM_CHANGE_WORD(); break;
           case VIM_CI: VIM_CHANGE_INNER_WORD(); break;
@@ -804,7 +812,7 @@ bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
         return false;
 
       case VIM_Y:
-        switch (vim_queue) {
+        switch (queue) {
           case KC_NO: SHIFTED ? VIM_YANK_LINE() : VIM_LEADER(VIM_Y); break;
           case VIM_Y: VIM_YANK_WHOLE_LINE(); break;
         }
@@ -852,7 +860,7 @@ if (IS_LAYER_ON(_VIM_V) && record->event.pressed) {
         layer_move(_VIM_N);
         return false;
       case VIM_V_G:
-        switch (vim_queue) {
+        switch (queue) {
           case KC_NO: SHIFTED ? VIM_VISUAL_JUMP_END() : VIM_LEADER(VIM_V_G); break;
           case VIM_V_G: VIM_VISUAL_JUMP_HOME(); break;
         }
@@ -888,4 +896,15 @@ if (IS_LAYER_ON(_VIM_V) && record->event.pressed) {
   }
 
   return true;
+}
+
+void matrix_scan_vim() {
+  if (last_move.pressed) {
+    if (last_move.held) {
+      last_move.op();
+    } else if (timer_elapsed(last_move.timer) > TAPPING_TERM) {
+      last_move.held = true;
+      last_move.op();
+    }
+  }
 }
