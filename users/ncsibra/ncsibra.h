@@ -16,7 +16,7 @@
 #define TH_FIRST TH_ESC
 #define TH_LAST TH_BSPC
 
-enum preonic_layers {
+enum layers {
   _QWERTY,
   _LOWER,
   _RAISE,
@@ -25,7 +25,7 @@ enum preonic_layers {
   _VIM_V
 };
 
-enum preonic_keycodes {
+enum keycodes {
   // layer keys
   QWERTY = SAFE_RANGE,
   LOWER,
