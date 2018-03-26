@@ -5,8 +5,8 @@
 
 typedef void (*vim_operation_fn)(void);
 typedef struct {
+  uint16_t key;
   vim_operation_fn op;
-  bool pressed;
   bool held;
   uint16_t timer;
 } vim_move_state;

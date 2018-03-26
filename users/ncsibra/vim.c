@@ -6,12 +6,17 @@
 
 static uint16_t queue = KC_NO;
 static vim_operation_fn last_operation;
-static vim_move_state last_move = { .pressed = false, .held = false, .timer = 0 };
+static vim_move_state last_move = { .held = false, .timer = 0, .key = KC_NO };
 
 static void clear_shifted_state(void) {
   RELEASE(KC_LSFT);
   RELEASE(KC_RSFT);
   clear_oneshot_mods();
+}
+
+static void reset_last_move(void) {
+  last_move.key = KC_NO;
+  last_move.held = false;
 }
 
 static void TAP(uint16_t keycode) {
@@ -42,9 +47,9 @@ static void VIM_REC(vim_operation_fn op) {
   op();
 }
 
-static void VIM_MOVE(vim_operation_fn op) {
+static void VIM_MOVE(uint16_t key, vim_operation_fn op) {
+  last_move.key = key;
   last_move.op = op;
-  last_move.pressed = true;
   last_move.timer = timer_read();
   op();
 }
@@ -93,6 +98,12 @@ static void VIM_BACK(void) {
  * Simulates vim's `x` command by sending ⇧→ then ⌘X.
  */
 static void VIM_CUT(void) {
+  VIM_LEADER(KC_NO);
+  TAP(KC_X);
+  layer_move(_VIM_N);
+}
+
+static void VIM_DELETE(void) {
   VIM_LEADER(KC_NO);
   TAP(KC_DEL);
 }
@@ -362,7 +373,7 @@ static void VIM_DELETE_WHOLE_LINE(void) {
     TAP(KC_END);
   RELEASE(KC_LSHIFT);
   CTRL(KC_X);
-  TAP(KC_DEL);
+  TAP(KC_BSPC);
 }
 
 /**
@@ -588,9 +599,7 @@ static void VIM_VISUAL_WORD(void) {
 
 static void VIM_VISUAL_SUBSTITUTE(void) {
   VIM_LEADER(KC_NO);
-  PRESS(KC_LSHIFT);
-    VIM_SUBSTITUTE();
-  RELEASE(KC_LSHIFT);
+  VIM_SUBSTITUTE();
 }
 
 static void VIM_VISUAL_DELETE(void) {
@@ -695,138 +704,142 @@ static void VIM_VISUAL_INNER_WORD(void) {
 }
 
 bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
- if (IS_LAYER_ON(_VIM_N)) {
-    if (!record->event.pressed) {
-      if (last_move.pressed) {
-        last_move.pressed = false;
-        last_move.held = false;
-      }
+  if (!IS_LAYER_ON(_VIM_N)) {
+    if (last_move.key != KC_NO) {
+      reset_last_move();
+    }
+    return true;
+  }
+
+  if (!record->event.pressed) {
+    if (keycode == last_move.key) {
+      reset_last_move();
       return false;
     }
+    return true;
+  }
 
-    bool SHIFTED = MOD_ACTIVE(KC_LSFT) || MOD_ACTIVE(KC_RSFT);
+  bool SHIFTED = MOD_ACTIVE(KC_LSFT) || MOD_ACTIVE(KC_RSFT);
 
-    switch (keycode) {
+  switch (keycode) {
+    case VIM_A:
+      SHIFTED ? VIM_APPEND_LINE() : VIM_APPEND();
+      return false;
 
-      case VIM_A:
-        SHIFTED ? VIM_APPEND_LINE() : VIM_APPEND();
-        return false;
+    case VIM_B:
+      switch(queue) {
+        case KC_NO: VIM_MOVE(keycode, VIM_BACK); break;
+        case VIM_C: VIM_CHANGE_BACK(); break;
+        case VIM_D: VIM_REC(VIM_DELETE_BACK); break;
+      }
+      return false;
 
-      case VIM_B:
-        switch(queue) {
-          case KC_NO: VIM_MOVE(VIM_BACK); break;
-          case VIM_C: VIM_CHANGE_BACK(); break;
-          case VIM_D: VIM_DELETE_BACK(); break;
-        }
-        return false;
+    case VIM_C:
+      switch(queue) {
+        case KC_NO: SHIFTED ? VIM_CHANGE_LINE() : VIM_LEADER(VIM_C); break;
+        case VIM_C: VIM_CHANGE_WHOLE_LINE(); break;
+      }
+      return false;
 
-      case VIM_C:
-        switch(queue) {
-          case KC_NO: SHIFTED ? VIM_CHANGE_LINE() : VIM_LEADER(VIM_C); break;
-          case VIM_C: VIM_CHANGE_WHOLE_LINE(); break;
-        }
-        return false;
+    case VIM_D:
+      switch(queue) {
+        case KC_NO: SHIFTED ? VIM_REC(VIM_DELETE_LINE) : VIM_LEADER(VIM_D); break;
+        case VIM_D: VIM_REC(VIM_DELETE_WHOLE_LINE); break;
+      }
+      return false;
 
-      case VIM_D:
-        switch(queue) {
-          case KC_NO: SHIFTED ? VIM_DELETE_LINE() : VIM_LEADER(VIM_D); break;
-          case VIM_D: VIM_REC(VIM_DELETE_WHOLE_LINE); break;
-        }
-        return false;
+    case VIM_G:
+      switch (queue) {
+        case KC_NO: SHIFTED ? VIM_JUMP_END() : VIM_LEADER(VIM_G); break;
+        case VIM_G: VIM_JUMP_HOME(); break;
+      }
+      return false;
 
-      case VIM_G:
-        switch (queue) {
-          case KC_NO: SHIFTED ? VIM_JUMP_END() : VIM_LEADER(VIM_G); break;
-          case VIM_G: VIM_JUMP_HOME(); break;
-        }
-        return false;
+    case VIM_H:
+      switch (queue) {
+        case KC_NO: VIM_MOVE(keycode, VIM_LEFT); break;
+        case VIM_C: VIM_CHANGE_LEFT(); break;
+        case VIM_D: VIM_REC(VIM_DELETE_LEFT); break;
+      }
+      return false;
 
-      case VIM_H:
-        switch (queue) {
-          case KC_NO: VIM_MOVE(VIM_LEFT); break;
-          case VIM_C: VIM_CHANGE_LEFT(); break;
-          case VIM_D: VIM_DELETE_LEFT(); break;
-        }
-        return false;
+    case VIM_I:
+      switch (queue) {
+        case KC_NO: layer_move(_QWERTY); break;
+        case VIM_C: VIM_LEADER(VIM_CI); break;
+        case VIM_D: VIM_LEADER(VIM_DI); break;
+      }
+      return false;
 
-      case VIM_I:
-        switch (queue) {
-          case KC_NO: layer_move(_QWERTY); break;
-          case VIM_C: VIM_LEADER(VIM_CI); break;
-          case VIM_D: VIM_LEADER(VIM_DI); break;
-        }
-        return false;
+    case VIM_J:
+      switch (queue) {
+        case KC_NO: SHIFTED ? VIM_JOIN() : VIM_MOVE(keycode, VIM_DOWN); break;
+        case VIM_C: VIM_CHANGE_DOWN(); break;
+        case VIM_D: VIM_REC(VIM_DELETE_DOWN); break;
+      }
+      return false;
 
-      case VIM_J:
-        switch (queue) {
-          case KC_NO: SHIFTED ? VIM_JOIN() : VIM_MOVE(VIM_DOWN); break;
-          case VIM_C: VIM_CHANGE_DOWN(); break;
-          case VIM_D: VIM_DELETE_DOWN(); break;
-        }
-        return false;
+    case VIM_K:
+      switch (queue) {
+        case KC_NO: VIM_MOVE(keycode, VIM_UP); break;
+        case VIM_C: VIM_CHANGE_UP(); break;
+        case VIM_D: VIM_REC(VIM_DELETE_UP); break;
+      }
+      return false;
 
-      case VIM_K:
-        switch (queue) {
-          case KC_NO: VIM_UP(); break;
-          case VIM_C: VIM_CHANGE_UP(); break;
-          case VIM_D: VIM_DELETE_UP(); break;
-        }
-        return false;
+    case VIM_L:
+      switch (queue) {
+        case KC_NO: VIM_MOVE(keycode, VIM_RIGHT); break;
+        case VIM_C: VIM_CHANGE_RIGHT(); break;
+        case VIM_D: VIM_REC(VIM_DELETE_RIGHT); break;
+      }
+      return false;
+    case VIM_O:
+      SHIFTED ? VIM_OPEN_ABOVE() : VIM_OPEN();
+      return false;
 
-      case VIM_L:
-        switch (queue) {
-          case KC_NO: VIM_RIGHT(); break;
-          case VIM_C: VIM_CHANGE_RIGHT(); break;
-          case VIM_D: VIM_DELETE_RIGHT(); break;
-        }
-        return false;
-      case VIM_O:
-        SHIFTED ? VIM_OPEN_ABOVE() : VIM_OPEN();
-        return false;
+    case VIM_P:
+      SHIFTED ? VIM_PUT_BEFORE() : VIM_PUT();
+      return false;
 
-      case VIM_P:
-        SHIFTED ? VIM_PUT_BEFORE() : VIM_PUT();
-        return false;
+    case VIM_S:
+      SHIFTED ? VIM_CHANGE_WHOLE_LINE() : VIM_SUBSTITUTE();
+      return false;
 
-      case VIM_S:
-        SHIFTED ? VIM_CHANGE_WHOLE_LINE() : VIM_SUBSTITUTE();
-        return false;
+    case VIM_U:
+      VIM_MOVE(keycode, VIM_UNDO);
+      return false;
 
-      case VIM_U:
-        VIM_UNDO();
-        return false;
+    case VIM_W:
+      switch (queue) {
+        case KC_NO: VIM_MOVE(keycode, VIM_WORD); break;
+        case VIM_C: VIM_CHANGE_WORD(); break;
+        case VIM_CI: VIM_CHANGE_INNER_WORD(); break;
+        case VIM_D: VIM_REC(VIM_DELETE_WORD); break;
+        case VIM_DI: VIM_REC(VIM_DELETE_INNER_WORD); break;
+        case VIM_VI: VIM_VISUAL_INNER_WORD(); break;
+      }
+      return false;
 
-      case VIM_W:
-        switch (queue) {
-          case KC_NO: VIM_WORD(); break;
-          case VIM_C: VIM_CHANGE_WORD(); break;
-          case VIM_CI: VIM_CHANGE_INNER_WORD(); break;
-          case VIM_D: VIM_REC(VIM_DELETE_WORD); break;
-          case VIM_DI: VIM_DELETE_INNER_WORD(); break;
-          case VIM_VI: VIM_VISUAL_INNER_WORD(); break;
-        }
-        return false;
+    case VIM_X:
+      VIM_MOVE(keycode, VIM_DELETE);
+      return false;
 
-      case VIM_X:
-        VIM_CUT();
-        return false;
-
-      case VIM_Y:
-        switch (queue) {
-          case KC_NO: SHIFTED ? VIM_YANK_LINE() : VIM_LEADER(VIM_Y); break;
-          case VIM_Y: VIM_YANK_WHOLE_LINE(); break;
-        }
-        return false;
-      case VIM_DOT:
-        VIM_DOT_REPEAT();
-        return false;
-      case VIM_0:
-        VIM_LINE_HOME();
-        return false;
-      case VIM_DLR:
-        VIM_LINE_END();
-        return false;
-    }
+    case VIM_Y:
+      switch (queue) {
+        case KC_NO: SHIFTED ? VIM_YANK_LINE() : VIM_LEADER(VIM_Y); break;
+        case VIM_Y: VIM_YANK_WHOLE_LINE(); break;
+      }
+      return false;
+    case VIM_DOT:
+      VIM_MOVE(keycode, VIM_DOT_REPEAT);
+      return false;
+    case VIM_0:
+      VIM_LINE_HOME();
+      return false;
+    case VIM_DLR:
+      VIM_LINE_END();
+      return false;
   }
 
   return true;
@@ -839,7 +852,7 @@ if (IS_LAYER_ON(_VIM_V) && record->event.pressed) {
     switch (keycode) {
 
       case VIM_V_W:
-        VIM_VISUAL_WORD();
+        VIM_MOVE(keycode, VIM_VISUAL_WORD);
         return false;
       case VIM_V_S:
         VIM_VISUAL_SUBSTITUTE();
@@ -866,25 +879,25 @@ if (IS_LAYER_ON(_VIM_V) && record->event.pressed) {
         }
         return false;
       case VIM_V_B:
-        VIM_VISUAL_BACK();
+        VIM_MOVE(keycode, VIM_VISUAL_BACK);
         return false;
       case VIM_V_Y:
         VIM_VISUAL_YANK();
         return false;
       case VIM_V_H:
-        VIM_VISUAL_LEFT();
+        VIM_MOVE(keycode, VIM_VISUAL_LEFT);
         return false;
       case VIM_V_J:
-        VIM_VISUAL_DOWN();
+        VIM_MOVE(keycode, VIM_VISUAL_DOWN);
         return false;
       case VIM_I:
         layer_move(_QWERTY);
         return false;
       case VIM_V_K:
-        VIM_VISUAL_UP();
+        VIM_MOVE(keycode, VIM_VISUAL_UP);
         return false;
       case VIM_V_L:
-        VIM_VISUAL_RIGHT();
+        VIM_MOVE(keycode, VIM_VISUAL_RIGHT);
         return false;
       case VIM_V_0:
         VIM_VISUAL_LINE_HOME();
@@ -899,12 +912,11 @@ if (IS_LAYER_ON(_VIM_V) && record->event.pressed) {
 }
 
 void matrix_scan_vim() {
-  if (last_move.pressed) {
+  if (last_move.key != KC_NO) {
     if (last_move.held) {
       last_move.op();
     } else if (timer_elapsed(last_move.timer) > TAPPING_TERM) {
       last_move.held = true;
-      last_move.op();
     }
   }
 }

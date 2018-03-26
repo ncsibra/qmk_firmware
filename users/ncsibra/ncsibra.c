@@ -33,10 +33,10 @@ static taphold_t th_events[] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  return !process_record_user_vim_normal(keycode, record)
-      || !process_record_user_vim_visual(keycode, record)
-      || !process_record_user_taphold(keycode, record)
-      || process_record_keymap(keycode, record);
+  return process_record_user_vim_normal(keycode, record)
+      && process_record_user_vim_visual(keycode, record)
+      && process_record_user_taphold(keycode, record)
+      && process_record_keymap(keycode, record);
 };
 
 static uint16_t prev_th_key = KC_NO;
