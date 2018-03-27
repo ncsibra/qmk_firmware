@@ -142,10 +142,16 @@ static void VIM_OPEN(void) {
  * Vim-like `put` command for a line
  * Simulates vim's `p` command by sending ⌘V
  */
-static void VIM_PUT(void) {
+static void VIM_PUT_WHOLE_LINE(void) {
   VIM_LEADER(KC_NO);
   TAP(KC_END);
   TAP(KC_ENTER);
+  CTRL(KC_V);
+}
+
+static void VIM_PUT(void) {
+  VIM_LEADER(KC_NO);
+  TAP(KC_RIGHT);
   CTRL(KC_V);
 }
 
@@ -153,13 +159,20 @@ static void VIM_PUT(void) {
  * Vim-like `put before` command for a line
  * Simulates vim's `P` command by sending ↑, ⌘←, then ⌘V
  */
-static void VIM_PUT_BEFORE(void) {
+static void VIM_PUT_WHOLE_LINE_BEFORE(void) {
   VIM_LEADER(KC_NO);
   clear_shifted_state();
 
   TAP(KC_UP);
   TAP(KC_END);
   TAP(KC_ENTER);
+  CTRL(KC_V);
+}
+
+static void VIM_PUT_BEFORE(void) {
+  VIM_LEADER(KC_NO);
+  clear_shifted_state();
+
   CTRL(KC_V);
 }
 
@@ -374,6 +387,7 @@ static void VIM_DELETE_WHOLE_LINE(void) {
   RELEASE(KC_LSHIFT);
   CTRL(KC_X);
   TAP(KC_BSPC);
+  TAP(KC_DOWN);
 }
 
 /**
@@ -794,6 +808,11 @@ bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
         case VIM_D: VIM_REC(VIM_DELETE_RIGHT); break;
       }
       return false;
+
+    case VIM_N:
+      SHIFTED ? VIM_PUT_WHOLE_LINE_BEFORE() : VIM_PUT_WHOLE_LINE();
+      return false;
+
     case VIM_O:
       SHIFTED ? VIM_OPEN_ABOVE() : VIM_OPEN();
       return false;

@@ -48,11 +48,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 },
 
 [_RAISE] = {
-  {RESET,      XXXXXXX,    XXXXXXX,       XXXXXXX,       XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_BSPC},
-  {DEBUG,      XXXXXXX,    LSFT(KC_HOME), LSFT(KC_UP),   LSFT(KC_END),   XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_END,     XXXXXXX,    KC_DEL},
-  {KC_CAPS,    XXXXXXX,    LSFT(KC_LEFT), LSFT(KC_DOWN), LSFT(KC_RIGHT), XXXXXXX,    XXXXXXX,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   XXXXXXX,    _______},
-  {_______,    XXXXXXX,    LSFT(KC_PGUP), XXXXXXX,       LSFT(KC_PGDN),  XXXXXXX,    XXXXXXX,    KC_PGUP,    XXXXXXX,    KC_PGDN,    XXXXXXX,    _______},
-  {_______,    _______,    _______,       _______,       TO(_VIM_N),       _______,    _______,    _______,    _______,    _______,    _______,    _______}
+  {RESET,      XXXXXXX,    XXXXXXX,       XXXXXXX,       XXXXXXX,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_BSPC},
+  {DEBUG,      XXXXXXX,    XXXXXXX,       XXXXXXX,       XXXXXXX,     XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_END,     XXXXXXX,    KC_DEL},
+  {KC_CAPS,    XXXXXXX,    KC_LCTRL,      KC_LALT,       KC_LSFT,     XXXXXXX,    XXXXXXX,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   XXXXXXX,    _______},
+  {_______,    XXXXXXX,    XXXXXXX,       XXXXXXX,       XXXXXXX,     XXXXXXX,    XXXXXXX,    KC_PGUP,    XXXXXXX,    KC_PGDN,    XXXXXXX,    _______},
+  {_______,    _______,    _______,       _______,       TO(_VIM_N),  _______,    _______,    _______,    _______,    _______,    _______,    _______}
 },
 
 [_NUM] = {
