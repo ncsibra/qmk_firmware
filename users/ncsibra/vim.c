@@ -99,7 +99,7 @@ static void VIM_BACK(void) {
  */
 static void VIM_CUT(void) {
   VIM_LEADER(KC_NO);
-  TAP(KC_X);
+  CTRL(KC_X);
   layer_move(_VIM_N);
 }
 
