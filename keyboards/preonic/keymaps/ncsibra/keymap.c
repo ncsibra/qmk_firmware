@@ -19,11 +19,11 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_QWERTY] = {
-  {TH_ESC,         TH_1,     TH_2,     TH_3,           TH_4,         TH_5,    TH_6,    TH_7,        TH_8,     TH_9,     TH_0,     TH_BSPC},
-  {KC_TAB,         KC_Q,     KC_W,     KC_E,           KC_R,         KC_T,    KC_Y,    KC_U,        KC_I,     KC_O,     KC_P,     KC_QUOT},
-  {KC_ESC,         KC_A,     KC_S,     KC_D,           KC_F,         KC_G,    KC_H,    KC_J,        KC_K,     KC_L,     KC_SCLN,  KC_ENT},
-  {OSM(MOD_LSFT),  KC_Z,     KC_X,     KC_C,           KC_V,         KC_B,    KC_N,    KC_M,        KC_COMM,  KC_DOT,   KC_SLSH,  OSM(MOD_RSFT)},
-  {TT(_NUM),       KC_LGUI,  KC_LALT,  CTL_T(KC_DEL),  OSL(_LOWER),  KC_SPC,  KC_BSPC, TT(_RAISE),  KC_RCTRL, KC_RALT,  TO(_NUM), KC_LEAD}
+  {TH_ESC,         TH_1,     TH_2,     TH_3,           TH_4,         TH_5,    TH_6,    TH_7,        TH_8,          TH_9,     TH_0,     TH_BSPC},
+  {KC_TAB,         KC_Q,     KC_W,     KC_E,           KC_R,         KC_T,    KC_Y,    KC_U,        KC_I,          KC_O,     KC_P,     KC_QUOT},
+  {KC_ESC,         KC_A,     KC_S,     KC_D,           KC_F,         KC_G,    KC_H,    KC_J,        KC_K,          KC_L,     KC_SCLN,  KC_ENT},
+  {OSM(MOD_LSFT),  KC_Z,     KC_X,     KC_C,           KC_V,         KC_B,    KC_N,    KC_M,        KC_COMM,       KC_DOT,   KC_SLSH,  OSM(MOD_RSFT)},
+  {TT(_NUM),       KC_LGUI,  KC_LALT,  OSM(MOD_LCTL),  OSL(_LOWER),  KC_SPC,  KC_BSPC, TT(_RAISE),  CTL_T(KC_DEL), KC_RALT,  TO(_NUM), KC_LEAD}
 },
 
 /* Lower
