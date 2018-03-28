@@ -33,6 +33,14 @@ static taphold_t th_events[] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // if keycode is ESC or at least contains ESC(in case of Mod Tap etc) and one shot modifier or one shot layer is active, then cancel
+  if (((keycode & 0xFF) == KC_ESC) && OSK_ACTIVE()) {
+    layer_off(get_oneshot_layer());
+    reset_oneshot_layer();
+    clear_oneshot_mods();
+    return false;
+  }
+
   return process_record_user_vim_normal(keycode, record)
       && process_record_user_vim_visual(keycode, record)
       && process_record_user_taphold(keycode, record)

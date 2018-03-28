@@ -4,6 +4,7 @@
 #include "quantum.h"
 
 #define MOD_ACTIVE(mod) ((keyboard_report->mods & MOD_BIT(mod)) || ((get_oneshot_mods() & MOD_BIT(mod)) && !has_oneshot_mods_timed_out()))
+#define OSK_ACTIVE()    ((get_oneshot_mods()) || is_oneshot_layer_active())
 
 // increase readability
 #define _______ KC_TRNS

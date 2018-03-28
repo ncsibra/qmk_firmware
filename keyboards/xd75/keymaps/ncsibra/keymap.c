@@ -5,7 +5,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = {
   {TH_ESC,         TH_1,     TH_2,           TH_3,           TH_4,         TH_5,    KC_MINS, KC_GRV,  KC_EQL,   TH_6,    TH_7,        TH_8,          TH_9,           TH_0,     TH_BSPC},
   {KC_TAB,         KC_Q,     KC_W,           KC_E,           KC_R,         KC_T,    KC_LBRC, KC_BSLS, KC_RBRC,  KC_Y,    KC_U,        KC_I,          KC_O,           KC_P,     KC_QUOT},
-  {KC_ESC,         KC_A,     KC_S,           KC_D,           KC_F,         KC_G,    KC_HOME, KC_DEL,  KC_PGUP,  KC_H,    KC_J,        KC_K,          KC_L,           KC_SCLN,  KC_ENT},
+  {CTL_T(KC_ESC),  KC_A,     KC_S,           KC_D,           KC_F,         KC_G,    KC_HOME, KC_DEL,  KC_PGUP,  KC_H,    KC_J,        KC_K,          KC_L,           KC_SCLN,  KC_ENT},
   {OSM(MOD_LSFT),  KC_Z,     KC_X,           KC_C,           KC_V,         KC_B,    KC_END,  KC_UP,   KC_PGDN,  KC_N,    KC_M,        KC_COMM,       KC_DOT,         KC_SLSH,  OSM(MOD_RSFT)},
   {TT(_NUM),       KC_LGUI,  OSM(MOD_LALT),  OSM(MOD_LCTL),  OSL(_LOWER),  KC_SPC,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_BSPC, TT(_RAISE),  CTL_T(KC_DEL), OSM(MOD_LALT),  TO(_NUM), KC_LEAD}
 },
@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_EXLM,     KC_LBRC,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RBRC,   KC_ASTR,     KC_AMPR,    KC_PIPE,   XXXXXXX,    KC_QUOT},
   {_______,    KC_AT,      KC_HASH,    KC_GRV,     KC_COLN,     KC_LPRN,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RPRN,   KC_EQL,      KC_PLUS,    KC_DQUO,   XXXXXXX,    KC_DQUO},
   {_______,    KC_CIRC,    KC_PERC,    KC_DLR,     KC_TILD,     KC_LCBR,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RCBR,   KC_MINS,     KC_UNDS,    KC_BSLS,   XXXXXXX,    _______},
-  {_______,    _______,    _______,    _______,    _______,    _______,   _______,  _______,  _______,  KC_DEL,    TO(_VIM_N),  _______,    _______,   _______,     XXXXXXX}
+  {_______,    _______,    _______,    _______,    _______,    _______,   _______,  _______,  _______,  KC_DEL,    TO(_VIM_N),  _______,    _______,   _______,    XXXXXXX}
 },
 
 [_RAISE] = {
