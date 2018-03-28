@@ -293,7 +293,7 @@ static void VIM_DELETE_LINE(void) {
   PRESS(KC_LSHIFT);
     TAP(KC_END);
   RELEASE(KC_LSHIFT);
-  CTRL(KC_X);
+  TAP(KC_DEL);
 }
 
 /**
@@ -385,7 +385,7 @@ static void VIM_DELETE_WHOLE_LINE(void) {
   PRESS(KC_LSHIFT);
     TAP(KC_END);
   RELEASE(KC_LSHIFT);
-  CTRL(KC_X);
+  TAP(KC_DEL);
   TAP(KC_BSPC);
   TAP(KC_DOWN);
 }
@@ -397,10 +397,7 @@ static void VIM_DELETE_WHOLE_LINE(void) {
  */
 static void VIM_DELETE_WORD(void) {
   VIM_LEADER(KC_NO);
-  PRESS(KC_LSHIFT);
-    CTRL(KC_RIGHT);
-  RELEASE(KC_LSHIFT);
-  CTRL(KC_X); // delete selection
+  CTRL(KC_DEL);
 }
 
 /**
@@ -409,10 +406,7 @@ static void VIM_DELETE_WORD(void) {
  */
 static void VIM_DELETE_BACK(void) {
   VIM_LEADER(KC_NO);
-  PRESS(KC_LSHIFT);
-    CTRL(KC_LEFT);
-  RELEASE(KC_LSHIFT);
-  CTRL(KC_X);
+  CTRL(KC_BSPC);
 }
 
 /**
@@ -445,7 +439,7 @@ static void VIM_DELETE_UP(void) {
     TAP(KC_UP);
     TAP(KC_HOME);
   RELEASE(KC_LSHIFT);
-  TAP(KC_X);
+  TAP(KC_DEL);
 }
 
 /**
@@ -460,7 +454,7 @@ static void VIM_DELETE_DOWN(void) {
     TAP(KC_DOWN);
     TAP(KC_END);
   RELEASE(KC_LSHIFT);
-  TAP(KC_X);
+  TAP(KC_DEL);
 }
 
 /***
