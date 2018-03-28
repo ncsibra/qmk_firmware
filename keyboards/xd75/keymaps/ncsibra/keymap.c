@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,     XXXXXXX,    XXXXXXX,   XXXXXXX,    KC_BSPC},
   {XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_EXLM,     KC_LBRC,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RBRC,   KC_ASTR,     KC_AMPR,    KC_PIPE,   XXXXXXX,    KC_QUOT},
   {_______,    KC_AT,      KC_HASH,    KC_GRV,     KC_COLN,     KC_LPRN,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RPRN,   KC_EQL,      KC_PLUS,    KC_DQUO,   XXXXXXX,    KC_DQUO},
-  {_______,    KC_CIRC,    KC_PERC,    KC_DLR,     KC_TILD,     KC_LCBR,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RCBR,   KC_UNDS,     KC_MINS,    KC_BSLS,   XXXXXXX,    _______},
+  {_______,    KC_CIRC,    KC_PERC,    KC_DLR,     KC_TILD,     KC_LCBR,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RCBR,   KC_MINS,     KC_UNDS,    KC_BSLS,   XXXXXXX,    _______},
   {_______,    _______,    _______,    _______,    _______,    _______,   _______,  _______,  _______,  KC_DEL,    TO(_VIM_N),  _______,    _______,   _______,     XXXXXXX}
 },
 
