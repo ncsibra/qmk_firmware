@@ -34,7 +34,7 @@ static taphold_t th_events[] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // if keycode is ESC or at least contains ESC(in case of Mod Tap etc) and one shot modifier or one shot layer is active, then cancel
-  if (((keycode & 0xFF) == KC_ESC) && OSK_ACTIVE()) {
+  if (record->event.pressed && OSK_ACTIVE() && ((keycode & 0xFF) == KC_ESC)) {
     layer_off(get_oneshot_layer());
     reset_oneshot_layer();
     clear_oneshot_mods();
