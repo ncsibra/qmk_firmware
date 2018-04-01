@@ -1,13 +1,6 @@
 #ifndef CONFIG_USER_H
 #define CONFIG_USER_H
 
-#include "config_common.h"
-
-#define LEADER_TIMEOUT 500
-#define TAPPING_TOGGLE 2
-#define TAPPING_TERM 200
-#define PREVENT_STUCK_MODIFIERS
-
 #define BLANK_MID \
   XXXXXXX, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, XXXXXXX, \
