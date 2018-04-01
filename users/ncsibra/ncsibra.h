@@ -92,7 +92,7 @@ enum keycodes {
 };
 
 // Expand arguments to be able to call our custom KEYMAP macro.
-#define VA_KEYMAP(...)           KEYMAP_USER(__VA_ARGS__)
+#define VA_KEYMAP(...)           KB_KEYMAP(__VA_ARGS__)
 
 #define QWERTY_LAYER \
   TH_ESC,         TH_1,     TH_2,           TH_3,           TH_4,         TH_5,    TH_6,     TH_7,        TH_8,           TH_9,     TH_0,      TH_BSPC, \
