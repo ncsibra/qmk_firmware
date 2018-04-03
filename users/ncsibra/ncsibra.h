@@ -134,7 +134,7 @@ enum keycodes {
   XXXXXXX,  XXXXXXX,     XXXXXXX,     XXXXXXX,       XXXXXXX,       XXXXXXX,  XXXXXXX,  KC_KP_7,     KC_KP_8,      KC_KP_9,      KC_KP_MINUS,     XXXXXXX, \
   KC_VOLU,  LCTL(KC_A),  LCTL(KC_S),  XXXXXXX,       LCTL(KC_F),    XXXXXXX,  XXXXXXX,  KC_KP_4,     KC_KP_5,      KC_KP_6,      KC_KP_PLUS,      KC_KP_ENTER, \
   KC_VOLD,  LCTL(KC_Z),  LCTL(KC_X),  LCTL(KC_INS),  LSFT(KC_INS),  XXXXXXX,  XXXXXXX,  KC_KP_1,     KC_KP_2,      KC_KP_3,      XXXXXXX,         XXXXXXX, \
-  _______,  _______,     _______,     TO(_QWERTY),   XXXXXXX,       KC_SPC,   KC_BSPC,  KC_KP_0,     KC_KP_DOT,    XXXXXXX,      TO(_QWERTY),     XXXXXXX
+  _______,  _______,     _______,     TO(_QWERTY),   XXXXXXX,       KC_SPC,   KC_BSPC,  KC_KP_0,     KC_KP_DOT,    KC_KP_DOT,    TO(_QWERTY),     XXXXXXX
 
 
 #define VIM_NORMAL_LAYER \
