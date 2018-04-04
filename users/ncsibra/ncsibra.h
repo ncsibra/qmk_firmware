@@ -10,12 +10,8 @@
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 
-// tap-hold settings
-#define TH_DELAY 300
-
-#define TH_EVENTS_COUNT 12
-#define TH_FIRST TH_ESC
-#define TH_LAST TH_BSPC
+#define REPEAT_DELAY 500
+#define REPEAT_RATE 30
 
 enum layers {
   _QWERTY,
@@ -109,7 +105,7 @@ enum keycodes {
 * |------+------+------+------+------+-------------+------+------+------+------+------|
 * |      |   @  |   #  |   `  |   :  |   (  |   )  |   =  |   +  |   "  |      |   "  |
 * |------+------+------+------+------+------|------+------+------+------+------+------|
-* |      |   ^  |   %  |   $  |   ~  |   {  |   }  |   _  |   -  |   \  |      |      |
+* |      |   ^  |   %  |   $  |   ~  |   {  |   }  |   -  |   _  |   \  |      |      |
 * |------+------+------+------+------+------+------+------+------+------+------+------|
 * |      |      |      |      | Lower|      |      |Raise |      |      |      |      |
 * `-----------------------------------------------------------------------------------'
@@ -150,6 +146,13 @@ enum keycodes {
   TO(_VIM_N),     XXXXXXX,  VIM_V_S,  VIM_V_D,  XXXXXXX,      VIM_V_G,  VIM_V_H,  VIM_V_J,  VIM_V_K,  VIM_V_L,  XXXXXXX,  KC_ENT, \
   OSM(MOD_LSFT),  XXXXXXX,  VIM_X,    VIM_V_C,  VIM_V_V,      VIM_V_B,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  OSM(MOD_RSFT), \
   XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(_QWERTY),  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+
+// tap-hold settings
+#define TH_DELAY 200
+
+#define TH_EVENTS_COUNT 12
+#define TH_FIRST TH_ESC
+#define TH_LAST TH_BSPC
 
 typedef struct {
     bool is_pressed;

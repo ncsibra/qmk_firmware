@@ -381,9 +381,10 @@ static void VIM_JUMP_END(void) {
  */
 static void VIM_DELETE_WHOLE_LINE(void) {
   VIM_LEADER(KC_NO);
-  TAP(KC_HOME);
+  TAP(KC_END);
   PRESS(KC_LSHIFT);
-    TAP(KC_END);
+    TAP(KC_HOME);
+    TAP(KC_HOME); // remove indentation too
   RELEASE(KC_LSHIFT);
   TAP(KC_DEL);
   TAP(KC_BSPC);
@@ -924,12 +925,18 @@ if (IS_LAYER_ON(_VIM_V) && record->event.pressed) {
   return true;
 }
 
+static uint16_t last_repeat = 0;
+
 void matrix_scan_vim() {
-  if (last_move.key != KC_NO) {
-    if (last_move.held) {
-      last_move.op();
-    } else if (timer_elapsed(last_move.timer) > TAPPING_TERM) {
-      last_move.held = true;
+  if (timer_elapsed(last_repeat) > REPEAT_RATE) {
+    last_repeat = timer_read();
+
+    if (last_move.key != KC_NO) {
+      if (last_move.held) {
+        last_move.op();
+      } else if (timer_elapsed(last_move.timer) > REPEAT_DELAY) {
+        last_move.held = true;
+      }
     }
   }
 }
