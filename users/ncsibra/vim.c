@@ -812,7 +812,7 @@ bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
       return false;
 
     case VIM_P:
-      SHIFTED ? VIM_PUT_BEFORE() : VIM_PUT();
+      SHIFTED ? VIM_PUT() : VIM_PUT_BEFORE();
       return false;
 
     case VIM_S:
