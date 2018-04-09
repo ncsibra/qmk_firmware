@@ -119,14 +119,14 @@ enum keycodes {
 * `-----------------------------------------------------------------------------------'
 */
 #define LOWER_LAYER \
-  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC, \
-  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_EXLM,   KC_LBRC,  KC_RBRC,  KC_ASTR,     KC_AMPR,  KC_PIPE,  XXXXXXX,  KC_QUOT, \
-  _______,  KC_AT,    KC_HASH,  KC_GRV,   KC_COLN,   KC_LPRN,  KC_RPRN,  KC_EQL,      KC_PLUS,  KC_DQUO,  XXXXXXX,  KC_DQUO, \
-  _______,  KC_CIRC,  KC_PERC,  KC_DLR,   KC_TILD,   KC_LCBR,  KC_RCBR,  KC_MINS,     KC_UNDS,  KC_BSLS,  XXXXXXX,  _______, \
-  _______,  _______,  _______,  _______,  _______,   _______,  KC_DEL,   TO(_VIM_N),  _______,  _______,  _______,  XXXXXXX
+  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  DF(_QWERTY),   XXXXXXX,  XXXXXXX,  DF(_COLEMAK),     XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC, \
+  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_EXLM,       KC_LBRC,  KC_RBRC,  KC_ASTR,         KC_AMPR,  KC_PIPE,  XXXXXXX,  KC_QUOT, \
+  _______,  KC_AT,    KC_HASH,  KC_GRV,   KC_COLN,       KC_LPRN,  KC_RPRN,  KC_EQL,          KC_PLUS,  KC_DQUO,  XXXXXXX,  KC_DQUO, \
+  _______,  KC_CIRC,  KC_PERC,  KC_DLR,   KC_TILD,       KC_LCBR,  KC_RCBR,  KC_MINS,         KC_UNDS,  KC_BSLS,  XXXXXXX,  _______, \
+  _______,  _______,  _______,  _______,  _______,       _______,  KC_DEL,   TO(_VIM_N),      _______,  _______,  _______,  XXXXXXX
 
 #define RAISE_LAYER \
-  RESET,    XXXXXXX,  XXXXXXX,  XXXXXXX,  DF(_QWERTY), XXXXXXX,       XXXXXXX,  DF(_COLEMAK),       XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC, \
+  RESET,    KC_F1,    KC_F2,    KC_F3,    KC_F4,       KC_F5,         KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_BSPC, \
   DEBUG,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,       XXXXXXX,  KC_HOME,  KC_UP,    KC_END,   XXXXXXX,  KC_DEL, \
   KC_CAPS,  XXXXXXX,  KC_LCTRL, KC_LALT,  KC_LSFT,     XXXXXXX,       XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT, XXXXXXX,  _______, \
   _______,  KC_LGUI,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,       XXXXXXX,  KC_PGUP,  XXXXXXX,  KC_PGDN,  XXXXXXX,  _______, \
