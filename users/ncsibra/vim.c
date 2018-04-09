@@ -4,6 +4,8 @@
 #define PRESS(keycode) register_code16(keycode)
 #define RELEASE(keycode) unregister_code16(keycode)
 
+#define NORM_MODE _COLEMAK
+
 static uint16_t queue = KC_NO;
 static vim_operation_fn last_operation;
 static vim_move_state last_move = { .held = false, .timer = 0, .key = KC_NO };
@@ -81,7 +83,7 @@ static void VIM_DOT_REPEAT(void) {
 static void VIM_APPEND(void) {
   VIM_LEADER(KC_NO);
   TAP(KC_RIGHT);
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -135,7 +137,7 @@ static void VIM_OPEN(void) {
   VIM_LEADER(KC_NO);
   TAP(KC_END);
   TAP(KC_ENTER);
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -193,7 +195,7 @@ static void VIM_RIGHT(void) {
 static void VIM_SUBSTITUTE(void) {
   VIM_LEADER(KC_NO);
   TAP(KC_DEL);
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -279,7 +281,7 @@ static void VIM_APPEND_LINE(void) {
   clear_shifted_state();
 
   TAP(KC_END);
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -305,7 +307,7 @@ static void VIM_CHANGE_LINE(void) {
   clear_shifted_state();
 
   VIM_DELETE_LINE();
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -334,7 +336,7 @@ static void VIM_OPEN_ABOVE(void) {
   TAP(KC_UP);
   TAP(KC_END);
   TAP(KC_ENTER);
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -498,7 +500,7 @@ static void VIM_DELETE_INNER_WORD(void) {
 static void VIM_CHANGE_BACK(void) {
   VIM_LEADER(KC_NO);
   VIM_DELETE_BACK();
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -508,7 +510,7 @@ static void VIM_CHANGE_BACK(void) {
 static void VIM_CHANGE_DOWN(void) {
   VIM_LEADER(KC_NO);
   VIM_DELETE_DOWN();
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -518,7 +520,7 @@ static void VIM_CHANGE_DOWN(void) {
 static void VIM_CHANGE_LEFT(void) {
   VIM_LEADER(KC_NO);
   VIM_DELETE_LEFT();
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -528,7 +530,7 @@ static void VIM_CHANGE_LEFT(void) {
 static void VIM_CHANGE_RIGHT(void) {
   VIM_LEADER(KC_NO);
   VIM_DELETE_RIGHT();
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -538,7 +540,7 @@ static void VIM_CHANGE_RIGHT(void) {
 static void VIM_CHANGE_UP(void) {
   VIM_LEADER(KC_NO);
   VIM_DELETE_UP();
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /**
@@ -549,7 +551,7 @@ static void VIM_CHANGE_UP(void) {
 static void VIM_CHANGE_WORD(void) {
   VIM_LEADER(KC_NO);
   VIM_DELETE_WORD();
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /***
@@ -570,7 +572,7 @@ static void VIM_CHANGE_WORD(void) {
 static void VIM_CHANGE_INNER_WORD(void) {
   VIM_LEADER(KC_NO);
   VIM_DELETE_INNER_WORD();
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 /***
@@ -619,7 +621,7 @@ static void VIM_VISUAL_DELETE(void) {
 static void VIM_VISUAL_CHANGE(void) {
   VIM_LEADER(KC_NO);
   TAP(KC_DEL);
-  layer_move(_QWERTY);
+  layer_move(NORM_MODE);
 }
 
 static void VIM_VISUAL_LINE_END(void) {
@@ -774,7 +776,7 @@ bool process_record_user_vim_normal(uint16_t keycode, keyrecord_t *record) {
 
     case VIM_I:
       switch (queue) {
-        case KC_NO: layer_move(_QWERTY); break;
+        case KC_NO: layer_move(NORM_MODE); break;
         case VIM_C: VIM_LEADER(VIM_CI); break;
         case VIM_D: VIM_LEADER(VIM_DI); break;
       }
@@ -905,7 +907,7 @@ if (IS_LAYER_ON(_VIM_V) && record->event.pressed) {
         VIM_MOVE(keycode, VIM_VISUAL_DOWN);
         return false;
       case VIM_I:
-        layer_move(_QWERTY);
+        layer_move(NORM_MODE);
         return false;
       case VIM_V_K:
         VIM_MOVE(keycode, VIM_VISUAL_UP);
