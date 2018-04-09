@@ -156,7 +156,7 @@ enum keycodes {
   XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(_COLEMAK), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
 
 // tap-hold settings
-#define TH_DELAY 200
+#define TH_DELAY 300
 
 #define TH_EVENTS_COUNT 12
 #define TH_FIRST TH_ESC
