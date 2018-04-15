@@ -96,14 +96,14 @@ enum keycodes {
   KC_TAB,         KC_Q,     KC_W,           KC_F,           KC_P,         KC_B,    KC_J,     KC_L,        KC_U,           KC_Y,     KC_SCLN,   KC_QUOT, \
   KC_ESC,         KC_A,     KC_R,           KC_S,           KC_T,         KC_G,    KC_M,     KC_N,        KC_E,           KC_I,     KC_O,      KC_ENT, \
   OSM(MOD_LSFT),  KC_Z,     KC_X,           KC_C,           KC_D,         KC_V,    KC_K,     KC_H,        KC_COMM,        KC_DOT,   KC_SLSH,   OSM(MOD_RSFT), \
-  TT(_NUM),       KC_LGUI,  OSM(MOD_LALT),  OSM(MOD_LCTL),  OSL(_LOWER),  KC_SPC,  KC_BSPC,  TT(_RAISE),  OSM(MOD_LCTL),  KC_LEAD,  TO(_NUM),  KC_LEAD
+  TT(_NUM),       KC_LGUI,  OSM(MOD_LALT),  OSM(MOD_LCTL),  OSL(_LOWER),  KC_SPC,  KC_BSPC,  TT(_RAISE),  CTL_T(KC_DEL),  KC_LEAD,  TO(_NUM),  KC_LEAD
 
 #define QWERTY_LAYER \
   TH_ESC,         TH_1,     TH_2,           TH_3,           TH_4,         TH_5,    TH_6,     TH_7,        TH_8,           TH_9,     TH_0,      TH_BSPC, \
   KC_TAB,         KC_Q,     KC_W,           KC_E,           KC_R,         KC_T,    KC_Y,     KC_U,        KC_I,           KC_O,     KC_P,      KC_QUOT, \
   KC_ESC,         KC_A,     KC_S,           KC_D,           KC_F,         KC_G,    KC_H,     KC_J,        KC_K,           KC_L,     KC_SCLN,   KC_ENT, \
   OSM(MOD_LSFT),  KC_Z,     KC_X,           KC_C,           KC_V,         KC_B,    KC_N,     KC_M,        KC_COMM,        KC_DOT,   KC_SLSH,   OSM(MOD_RSFT), \
-  TT(_NUM),       KC_LGUI,  OSM(MOD_LALT),  OSM(MOD_LCTL),  OSL(_LOWER),  KC_SPC,  KC_BSPC,  TT(_RAISE),  OSM(MOD_LCTL),  KC_LEAD,  TO(_NUM),  KC_LEAD
+  TT(_NUM),       KC_LGUI,  OSM(MOD_LALT),  OSM(MOD_LCTL),  OSL(_LOWER),  KC_SPC,  KC_BSPC,  TT(_RAISE),  CTL_T(KC_DEL),  KC_LEAD,  TO(_NUM),  KC_LEAD
 
 /* Lower
 * ,-----------------------------------------------------------------------------------.
@@ -123,13 +123,13 @@ enum keycodes {
   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_EXLM,       KC_LBRC,  KC_RBRC,  KC_ASTR,         KC_AMPR,  KC_PIPE,  XXXXXXX,  KC_QUOT, \
   _______,  KC_AT,    KC_HASH,  KC_GRV,   KC_COLN,       KC_LPRN,  KC_RPRN,  KC_EQL,          KC_PLUS,  KC_DQUO,  XXXXXXX,  KC_DQUO, \
   _______,  KC_CIRC,  KC_PERC,  KC_DLR,   KC_TILD,       KC_LCBR,  KC_RCBR,  KC_MINS,         KC_UNDS,  KC_BSLS,  XXXXXXX,  _______, \
-  _______,  _______,  _______,  _______,  _______,       _______,  KC_DEL,   TO(_VIM_N),      _______,  _______,  _______,  XXXXXXX
+  _______,  _______,  _______,  _______,  _______,       _______,  _______,   TO(_VIM_N),      _______,  _______,  _______,  XXXXXXX
 
 #define RAISE_LAYER \
   RESET,    KC_F1,    KC_F2,    KC_F3,    KC_F4,       KC_F5,         KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_BSPC, \
   DEBUG,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,       XXXXXXX,  KC_HOME,  KC_UP,    KC_END,   XXXXXXX,  KC_DEL, \
-  KC_CAPS,  XXXXXXX,  KC_LCTRL, KC_LALT,  KC_LSFT,     XXXXXXX,       XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT, XXXXXXX,  _______, \
-  _______,  KC_LGUI,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,       XXXXXXX,  KC_PGUP,  XXXXXXX,  KC_PGDN,  XXXXXXX,  _______, \
+  _______,  XXXXXXX,  KC_LCTRL, KC_LALT,  KC_LSFT,     XXXXXXX,       XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT, XXXXXXX,  _______, \
+  KC_CAPS,  KC_LGUI,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,       XXXXXXX,  KC_PGUP,  XXXXXXX,  KC_PGDN,  XXXXXXX,  _______, \
   _______,  _______,  _______,  _______,  TO(_VIM_N),  LCTL(KC_SPC),  _______,  _______,  _______,  _______,  _______,  _______
 
 
@@ -142,17 +142,17 @@ enum keycodes {
 
 
 #define VIM_NORMAL_LAYER \
-  XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  VIM_DLR,      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  VIM_0,    XXXXXXX, \
-  XXXXXXX,        XXXXXXX,  VIM_W,    XXXXXXX,  XXXXXXX,      XXXXXXX,  VIM_Y,    VIM_U,    VIM_I,    VIM_O,    VIM_P,    XXXXXXX, \
-  TO(_COLEMAK),   VIM_A,    VIM_S,    VIM_D,    XXXXXXX,      VIM_G,    VIM_H,    VIM_J,    VIM_K,    VIM_L,    XXXXXXX,  KC_ENT, \
-  OSM(MOD_LSFT),  XXXXXXX,  VIM_X,    VIM_C,    TO(_VIM_V),   VIM_B,    VIM_N,    XXXXXXX,  XXXXXXX,  VIM_DOT,  XXXXXXX,  OSM(MOD_RSFT), \
-  XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(_COLEMAK), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+  XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  VIM_DLR,      XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  VIM_0,    XXXXXXX, \
+  XXXXXXX,        XXXXXXX,  VIM_W,    XXXXXXX,  VIM_P,        VIM_B,      VIM_J,    VIM_L,    VIM_U,    XXXXXXX,  VIM_Y,    XXXXXXX, \
+  TO(_COLEMAK),   VIM_A,    XXXXXXX,  VIM_S,    XXXXXXX,      VIM_G,      XXXXXXX,  VIM_N,    XXXXXXX,  VIM_I,    VIM_O,    KC_ENT, \
+  OSM(MOD_LSFT),  XXXXXXX,  VIM_X,    VIM_C,    VIM_D,        TO(_VIM_V), VIM_K,    VIM_H,    XXXXXXX,  VIM_DOT,  XXXXXXX,  OSM(MOD_RSFT), \
+  XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(_COLEMAK), XXXXXXX,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
 
 #define VIM_INSERT_LAYER \
   XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  VIM_V_DLR,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  VIM_V_0,  XXXXXXX, \
-  XXXXXXX,        XXXXXXX,  VIM_V_W,  XXXXXXX,  XXXXXXX,      XXXXXXX,  VIM_V_Y,  XXXXXXX,  VIM_I,    XXXXXXX,  VIM_V_P,  XXXXXXX, \
-  TO(_VIM_N),     XXXXXXX,  VIM_V_S,  VIM_V_D,  XXXXXXX,      VIM_V_G,  VIM_V_H,  VIM_V_J,  VIM_V_K,  VIM_V_L,  XXXXXXX,  KC_ENT, \
-  OSM(MOD_LSFT),  XXXXXXX,  VIM_X,    VIM_V_C,  VIM_V_V,      VIM_V_B,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  OSM(MOD_RSFT), \
+  XXXXXXX,        XXXXXXX,  VIM_V_W,  XXXXXXX,  VIM_V_P,      VIM_V_B,  VIM_V_J,  VIM_V_L,  XXXXXXX,  XXXXXXX,  VIM_V_Y,  XXXXXXX, \
+  TO(_VIM_N),     XXXXXXX,  XXXXXXX,  VIM_V_S,  XXXXXXX,      VIM_V_G,  XXXXXXX,  XXXXXXX,  XXXXXXX,  VIM_I,    XXXXXXX,  KC_ENT, \
+  OSM(MOD_LSFT),  XXXXXXX,  VIM_X,    VIM_V_C,  VIM_V_D,      VIM_V_V,  VIM_V_K,  VIM_V_H,  XXXXXXX,  XXXXXXX,  XXXXXXX,  OSM(MOD_RSFT), \
   XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(_COLEMAK), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
 
 // tap-hold settings
