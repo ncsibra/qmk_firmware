@@ -128,8 +128,8 @@ enum keycodes {
 #define RAISE_LAYER \
   RESET,    KC_F1,    KC_F2,    KC_F3,    KC_F4,       KC_F5,         KC_F6,    KC_F7,    KC_F8,    KC_F9,      KC_F10,   KC_BSPC, \
   DEBUG,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,       XXXXXXX,  KC_HOME,  KC_UP,    KC_END,     XXXXXXX,  KC_DEL, \
-  _______,  XXXXXXX,  KC_LCTRL, KC_LALT,  KC_LSFT,     XXXXXXX,       XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT,   XXXXXXX,  _______, \
-  KC_CAPS,  KC_LGUI,  XXXXXXX,  XXXXXXX,  XXXXXXX,     XXXXXXX,       XXXXXXX,  KC_PGUP,  XXXXXXX,  KC_PGDN,    XXXXXXX,  _______, \
+  _______,  KC_LGUI,  KC_LCTRL, KC_LALT,  KC_LSFT,     XXXXXXX,       XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT,   XXXXXXX,  _______, \
+  KC_CAPS,  _______,  _______,  _______,  _______,     _______,       XXXXXXX,  KC_PGUP,  XXXXXXX,  KC_PGDN,    XXXXXXX,  _______, \
   _______,  _______,  _______,  _______,  TO(_VIM_N),  LCTL(KC_SPC),  _______,  _______,  _______,  TG(_RAISE),  _______,  _______
 
 
