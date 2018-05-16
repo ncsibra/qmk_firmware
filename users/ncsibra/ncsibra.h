@@ -134,7 +134,7 @@ enum keycodes {
 
 
 #define NUM_LAYER \
-  XXXXXXX,       XXXXXXX,     XXXXXXX,     XXXXXXX,       XXXXXXX,     XXXXXXX,       XXXXXXX,  XXXXXXX,  KC_KP_EQUAL,  KC_KP_SLASH,  KC_KP_ASTERISK,  KC_BSPC, \
+  XXXXXXX,       XXXXXXX,     XXXXXXX,     XXXXXXX,       XXXXXXX,     XXXXXXX,       XXXXXXX,  XXXXXXX,     KC_KP_EQUAL,  KC_KP_SLASH,  KC_KP_ASTERISK,  KC_BSPC, \
   LCTL(KC_TAB),  XXXXXXX,     XXXXXXX,     XXXXXXX,       XXXXXXX,     XXXXXXX,       XXXXXXX,  KC_KP_7,     KC_KP_8,      KC_KP_9,      KC_KP_MINUS,     XXXXXXX, \
   KC_VOLU,       LCTL(KC_A),  LCTL(KC_S),  XXXXXXX,       LCTL(KC_F),  XXXXXXX,       XXXXXXX,  KC_KP_4,     KC_KP_5,      KC_KP_6,      KC_KP_PLUS,      KC_KP_ENTER, \
   KC_VOLD,       LCTL(KC_Z),  LCTL(KC_X),  LCTL(KC_INS),  XXXXXXX,     LSFT(KC_INS),  XXXXXXX,  KC_KP_1,     KC_KP_2,      KC_KP_3,      XXXXXXX,         XXXXXXX, \
