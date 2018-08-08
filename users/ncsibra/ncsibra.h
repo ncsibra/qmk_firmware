@@ -122,7 +122,7 @@ enum keycodes {
   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  DF(_QWERTY),   XXXXXXX,  XXXXXXX,  DF(_COLEMAK),    XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC, \
   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_EXLM,       KC_LBRC,  KC_RBRC,  KC_ASTR,         KC_AMPR,  KC_PIPE,  XXXXXXX,  KC_QUOT, \
   _______,  KC_AT,    KC_HASH,  KC_GRV,   KC_COLN,       KC_LPRN,  KC_RPRN,  KC_EQL,          KC_PLUS,  KC_DQUO,  XXXXXXX,  KC_DQUO, \
-  _______,  KC_CIRC,  KC_PERC,  KC_DLR,   KC_TILD,       KC_LCBR,  KC_RCBR,  KC_MINS,         KC_UNDS,  KC_BSLS,  XXXXXXX,  _______, \
+  _______,  KC_CIRC,  KC_DLR,   KC_PERC,   KC_TILD,       KC_LCBR,  KC_RCBR,  KC_MINS,         KC_UNDS,  KC_BSLS,  XXXXXXX,  _______, \
   _______,  _______,  _______,  _______,  _______,       _______,  _______,  _______,         _______,  _______,  _______,  XXXXXXX
 
 #define RAISE_LAYER \
