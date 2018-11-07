@@ -1,5 +1,4 @@
-#ifndef CONFIG_USER_H
-#define CONFIG_USER_H
+#pragma once
 
 #define BLANK_MID \
   XXXXXXX, XXXXXXX, XXXXXXX, \
@@ -27,4 +26,3 @@
     { K40, K41, K42, K43, K44, K45, K46, K47, K48, K49, K4A, K4B, K4C, K4D, K4E }  \
 }
 
-#endif

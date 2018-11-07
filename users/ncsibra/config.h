@@ -1,5 +1,6 @@
-#ifndef USERSPACE_CONFIG_H
-#define USERSPACE_CONFIG_H
+#pragma once
+
+#undef TAPPING_TOGGLE
 
 #define FORCE_NKRO
 
@@ -7,5 +8,3 @@
 #define TAPPING_TOGGLE 2
 #define TAPPING_TERM 200
 #define PREVENT_STUCK_MODIFIERS
-
-#endif
