@@ -87,6 +87,5 @@ SLEEP_LED_ENABLE = no
 API_SYSEX_ENABLE = no
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 RGBLIGHT_ENABLE  = no
-RGB_MATRIX_ENABLE = no // enable later
 
 LAYOUTS = ergodox
