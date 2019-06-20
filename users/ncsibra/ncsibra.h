@@ -91,18 +91,18 @@ enum keycodes {
 #define VA_KEYMAP(...)           KB_KEYMAP(__VA_ARGS__)
 
 #define COLEMAK_LAYER \
-  TH_ESC,         TH_1,     TH_2,           TH_3,           TH_4,         TH_5,    TH_6,     TH_7,        TH_8,           TH_9,     TH_0,      TH_BSPC, \
+  KC_ESC,         TH_1,     TH_2,           TH_3,           TH_4,         TH_5,    TH_6,     TH_7,        TH_8,           TH_9,     TH_0,      KC_BSPC, \
   KC_TAB,         KC_Q,     KC_W,           KC_F,           KC_P,         KC_B,    KC_J,     KC_L,        KC_U,           KC_Y,     KC_SCLN,   KC_QUOT, \
   KC_ESC,         KC_A,     KC_R,           KC_S,           KC_T,         KC_G,    KC_M,     KC_N,        KC_E,           KC_I,     KC_O,      KC_ENT, \
-  OSM(MOD_LSFT),  KC_Z,     KC_X,           KC_C,           KC_D,         KC_V,    KC_K,     KC_H,        KC_COMM,        KC_DOT,   KC_SLSH,   OSM(MOD_RSFT), \
-  MO(_NUM),       KC_LGUI,  OSM(MOD_LALT),  OSM(MOD_LCTL),  MO(_LOWER),   KC_SPC,  KC_BSPC,  MO(_RAISE),  CTL_T(KC_DEL),  KC_RALT,  KC_LEAD,   KC_LEAD
+  KC_LSFT,        KC_Z,     KC_X,           KC_C,           KC_D,         KC_V,    KC_K,     KC_H,        KC_COMM,        KC_DOT,   KC_SLSH,   KC_RSFT, \
+  MO(_NUM),       KC_LGUI,  KC_LALT,        KC_LCTL,        MO(_LOWER),   KC_SPC,  KC_BSPC,  MO(_RAISE),  KC_DEL,         KC_RALT,  KC_LEAD,   KC_RCTL
 
 #define QWERTY_LAYER \
-  TH_ESC,         TH_1,     TH_2,           TH_3,           TH_4,         TH_5,    TH_6,     TH_7,        TH_8,           TH_9,           TH_0,      TH_BSPC, \
+  KC_ESC,         TH_1,     TH_2,           TH_3,           TH_4,         TH_5,    TH_6,     TH_7,        TH_8,           TH_9,           TH_0,      KC_BSPC, \
   KC_TAB,         KC_Q,     KC_W,           KC_E,           KC_R,         KC_T,    KC_Y,     KC_U,        KC_I,           KC_O,           KC_P,      KC_QUOT, \
   KC_ESC,         KC_A,     KC_S,           KC_D,           KC_F,         KC_G,    KC_H,     KC_J,        KC_K,           KC_L,           KC_SCLN,   KC_ENT, \
-  OSM(MOD_LSFT),  KC_Z,     KC_X,           KC_C,           KC_V,         KC_B,    KC_N,     KC_M,        KC_COMM,        KC_DOT,         KC_SLSH,   OSM(MOD_RSFT), \
-  MO(_NUM),       KC_LGUI,  OSM(MOD_LALT),  OSM(MOD_LCTL),  MO(_LOWER),  KC_SPC,  KC_BSPC,  MO(_RAISE),  CTL_T(KC_DEL),  OSM(MOD_LALT),  KC_LEAD,   KC_LEAD
+  KC_LSFT,        KC_Z,     KC_X,           KC_C,           KC_V,         KC_B,    KC_N,     KC_M,        KC_COMM,        KC_DOT,         KC_SLSH,   KC_RSFT, \
+  MO(_NUM),       KC_LGUI,  KC_LALT,       KC_LCTL,         MO(_LOWER),   KC_SPC,  KC_BSPC,  MO(_RAISE),  KC_DEL,         KC_RALT,        KC_LEAD,   KC_RCTL
 
 /* Lower
 * ,-----------------------------------------------------------------------------------.
@@ -118,18 +118,18 @@ enum keycodes {
 * `-----------------------------------------------------------------------------------'
 */
 #define LOWER_LAYER \
-  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  DF(_QWERTY),   XXXXXXX,  XXXXXXX,  DF(_COLEMAK),    XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_BSPC, \
+  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,         KC_F6,    KC_7,     KC_F8,           KC_F9,    KC_F10,   KC_F11,   KC_F12, \
   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_EXLM,       KC_LBRC,  KC_RBRC,  KC_ASTR,         KC_AMPR,  KC_PIPE,  XXXXXXX,  KC_QUOT, \
   _______,  KC_AT,    KC_HASH,  KC_GRV,   KC_COLN,       KC_LPRN,  KC_RPRN,  KC_EQL,          KC_PLUS,  KC_DQUO,  XXXXXXX,  KC_DQUO, \
   _______,  KC_CIRC,  KC_DLR,   KC_PERC,   KC_TILD,       KC_LCBR,  KC_RCBR,  KC_MINS,         KC_UNDS,  KC_BSLS,  XXXXXXX,  _______, \
   _______,  _______,  _______,  _______,  _______,       _______,  _______,  _______,         _______,  _______,  _______,  XXXXXXX
 
 #define RAISE_LAYER \
-  RESET,    KC_F1,    KC_F2,    KC_F3,    KC_F4,       KC_F5,         KC_F6,    KC_F7,    KC_F8,    KC_F9,      KC_F10,   KC_BSPC, \
-  DEBUG,    XXXXXXX,  XXXXXXX,  KC_LSFT,  XXXXXXX,     XXXXXXX,       XXXXXXX,  KC_HOME,  KC_UP,    KC_END,     XXXXXXX,  KC_DEL, \
-  _______,  KC_LGUI,  KC_LALT,  XXXXXXX,  KC_LCTRL,    XXXXXXX,       XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT,   XXXXXXX,  _______, \
-  KC_CAPS,  _______,  _______,  _______,  _______,     _______,       XXXXXXX,  KC_PGUP,  XXXXXXX,  KC_PGDN,    XXXXXXX,  _______, \
-  _______,  _______,  _______,  _______,  _______   ,  LCTL(KC_SPC),  _______,  _______,  _______,  TG(_RAISE), _______,  _______
+  RESET,    XXXXXXX,  XXXXXXX,  XXXXXXX, DF(_QWERTY),  XXXXXXX,       XXXXXXX,     DF(_COLEMAK), XXXXXXX,  XXXXXXX,    XXXXXXX, XXXXXXX, \
+  DEBUG,    XXXXXXX,  XXXXXXX,  KC_LSFT,  XXXXXXX,     XXXXXXX,       XXXXXXX,     KC_HOME,      KC_UP,    KC_END,     XXXXXXX,  KC_DEL, \
+  _______,  KC_LGUI,  KC_LALT,  XXXXXXX,  KC_LCTRL,    XXXXXXX,       XXXXXXX,     KC_LEFT,      KC_DOWN,  KC_RIGHT,   XXXXXXX,  _______, \
+  KC_CAPS,  _______,  _______,  _______,  _______,     _______,       XXXXXXX,     KC_PGUP,      XXXXXXX,  KC_PGDN,    XXXXXXX,  _______, \
+  _______,  _______,  _______,  _______,  _______   ,  LCTL(KC_SPC),  _______,     _______,      _______,  TG(_RAISE), _______,  _______
 
 
 #define NUM_LAYER \
