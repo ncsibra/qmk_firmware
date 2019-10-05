@@ -23,12 +23,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MASTER_LEFT
 // #define EE_HANDS
 
-#undef RGBLED_NUM
-#define RGBLIGHT_ANIMATIONS
-#define RGBLED_NUM 12
-#define RGBLIGHT_HUE_STEP 8
-#define RGBLIGHT_SAT_STEP 8
-#define RGBLIGHT_VAL_STEP 8
+// #undef RGBLED_NUM
+// #define RGBLIGHT_ANIMATIONS
+// #define RGBLED_NUM 12
+// #define RGBLIGHT_HUE_STEP 8
+// #define RGBLIGHT_SAT_STEP 8
+// #define RGBLIGHT_VAL_STEP 8
 
 #define KB_KEYMAP( \
 	L00, L01, L02, L03, L04, L05, R00, R01, R02, R03, R04, R05, \
