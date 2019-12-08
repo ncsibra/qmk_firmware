@@ -53,6 +53,10 @@ bool has_usb(void) {
    return (USBSTA & (1<<VBUS));  //checks state of VBUS
 }
 
+// bool has_usb(void) {
+//    return false;
+// }
+
 void split_keyboard_setup(void) {
    setup_handedness();
 
