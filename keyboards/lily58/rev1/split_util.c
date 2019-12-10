@@ -48,14 +48,14 @@ static void keyboard_slave_setup(void) {
 }
 
 bool has_usb(void) {
+#ifdef ELITE_C_SPLIT_RIGHT
+    return false;
+#else
    USBCON |= (1 << OTGPADE); //enables VBUS pad
    _delay_us(5);
    return (USBSTA & (1<<VBUS));  //checks state of VBUS
+#endif
 }
-
-// bool has_usb(void) {
-//    return false;
-// }
 
 void split_keyboard_setup(void) {
    setup_handedness();
