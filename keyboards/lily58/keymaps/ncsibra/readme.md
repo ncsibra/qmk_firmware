@@ -9,6 +9,6 @@ To flash the halves use:
 ```
 #left side
 make lily58:ncsibra:dfu-split-left
-#right side, with RGB matrix fix
+#right side, with Elite-C v3 issue fix
 make lily58:ncsibra:dfu-split-right ELITE_C_SPLIT_RIGHT=yes
 ```

@@ -15,3 +15,7 @@ RGBLIGHT_ENABLE = no
 BACKLIGHT_ENABLE = no
 
 BOOTLOADER = atmel-dfu  # Elite-C
+
+ifeq ($(strip $(ELITE_C_SPLIT_RIGHT)), yes)
+  OPT_DEFS += -DELITE_C_SPLIT_RIGHT
+endif
