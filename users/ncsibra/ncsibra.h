@@ -116,7 +116,7 @@ enum keycodes {
 * |------+------+------+------+------+------+------+------+------+------+------+------|
 * |      |      |      |      | Lower|      |      |Raise |      |      |      |      |
 * `-----------------------------------------------------------------------------------'
-*/7
+*/
 #define LOWER_LAYER \
   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,         KC_F6,    KC_F7,     KC_F8,           KC_F9,    KC_F10,   KC_F11,   KC_F12, \
   RESET,    RESET,    XXXXXXX,  XXXXXXX,  KC_EXLM,       KC_LBRC,  KC_RBRC,  KC_ASTR,         KC_AMPR,  KC_PIPE,  XXXXXXX,  KC_QUOT, \
