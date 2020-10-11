@@ -17,6 +17,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_VIM_N] = VA_KEYMAP(VIM_NORMAL_LAYER, BLANK_MID),
 
 [_VIM_V] = VA_KEYMAP(VIM_INSERT_LAYER, BLANK_MID),
+
+[_WOW] = VA_KEYMAP(WOW_LAYER, BLANK_MID),
 };
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {

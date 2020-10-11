@@ -19,7 +19,8 @@ enum layers {
   _RAISE,
   _NUM,
   _VIM_N,
-  _VIM_V
+  _VIM_V,
+  _WOW
 };
 
 enum keycodes {
@@ -125,11 +126,11 @@ enum keycodes {
   _______,  _______,  _______,  _______,  _______,       _______,  _______,  _______,         _______,  _______,  _______,  XXXXXXX
 
 #define RAISE_LAYER \
-  RESET,    XXXXXXX,  XXXXXXX,  XXXXXXX, DF(_QWERTY),  XXXXXXX,       XXXXXXX,     DF(_COLEMAK), XXXXXXX,  XXXXXXX,    XXXXXXX, XXXXXXX, \
+  RESET,    XXXXXXX,  XXXXXXX,  XXXXXXX, DF(_QWERTY),  XXXXXXX,       XXXXXXX,     DF(_COLEMAK), XXXXXXX,  XXXXXXX,    XXXXXXX, DF(_WOW), \
   DEBUG,    XXXXXXX,  XXXXXXX,  KC_LSFT,  XXXXXXX,     XXXXXXX,       XXXXXXX,     KC_HOME,      KC_UP,    KC_END,     XXXXXXX,  KC_DEL, \
   _______,  KC_LGUI,  KC_LALT,  XXXXXXX,  KC_LCTRL,    XXXXXXX,       XXXXXXX,     KC_LEFT,      KC_DOWN,  KC_RIGHT,   XXXXXXX,  _______, \
   KC_CAPS,  _______,  _______,  _______,  _______,     _______,       XXXXXXX,     KC_PGUP,      XXXXXXX,  KC_PGDN,    XXXXXXX,  _______, \
-  _______,  _______,  _______,  _______,  _______   ,  LCTL(KC_SPC),  _______,     _______,      _______,  TG(_RAISE), _______,  _______
+  _______,  _______,  _______,  _______,  _______,     LCTL(KC_SPC),  _______,     _______,      _______,  TG(_RAISE), _______,  _______
 
 
 #define NUM_LAYER \
@@ -153,6 +154,13 @@ enum keycodes {
   TO(_VIM_N),     XXXXXXX,  XXXXXXX,  VIM_V_S,  XXXXXXX,      VIM_V_G,  XXXXXXX,  XXXXXXX,  XXXXXXX,  VIM_I,    XXXXXXX,  KC_ENT, \
   OSM(MOD_LSFT),  XXXXXXX,  VIM_X,    VIM_V_C,  VIM_V_D,      VIM_V_V,  VIM_V_K,  VIM_V_H,  XXXXXXX,  XXXXXXX,  XXXXXXX,  OSM(MOD_RSFT), \
   XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(_COLEMAK), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+
+#define WOW_LAYER \
+  KC_F1,          KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,   KC_F7,    KC_F8,   KC_F9,    KC_F10,   KC_F11,   KC_F12, \
+  KC_ESC,         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,    KC_Y,     KC_U,    KC_I,     KC_O,     KC_P,     KC_QUOT, \
+  KC_TAB,         KC_LSFT,  KC_A,     KC_S,     KC_D,     KC_F,    KC_H,     KC_J,    KC_K,     KC_L,     KC_SCLN,  KC_ENT, \
+  KC_LSFT,        KC_Z,     KC_X,     KC_R,     KC_C,     KC_V,    KC_N,     KC_M,    KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT, \
+  KC_LCTL,        KC_LCTL,  KC_LALT,  KC_LALT,  KC_SPC,   KC_SPC,  KC_BSPC,  KC_DEL,  KC_DEL,   KC_RALT,  KC_LEAD,  DF(_COLEMAK)
 
 // tap-hold settings
 #define TH_DELAY 300
