@@ -156,11 +156,11 @@ enum keycodes {
   XXXXXXX,        XXXXXXX,  XXXXXXX,  XXXXXXX,  TO(_COLEMAK), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
 
 #define WOW_LAYER \
-  KC_ESC,         KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,   KC_F7,    KC_F8,   KC_F9,    KC_F10,   KC_F11,   KC_F12, \
-  KC_TAB,         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,    KC_Y,     KC_U,    KC_I,     KC_O,     KC_P,     KC_QUOT, \
-  KC_TAB,         KC_LSFT,  KC_A,     KC_S,     KC_D,     KC_F,    KC_H,     KC_J,    KC_K,     KC_L,     KC_SCLN,  KC_ENT, \
-  KC_LSFT,        KC_Z,     KC_X,     KC_Z,     KC_C,     KC_V,    KC_N,     KC_M,    KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT, \
-  KC_LCTL,        KC_LCTL,  KC_LALT,  KC_LCTL,  KC_SPC,   KC_SPC,  KC_BSPC,  KC_DEL,  KC_DEL,   KC_RALT,  KC_LEAD,  TO(_COLEMAK)
+  KC_ESC,         TH_1,     TH_2,     TH_3,     TH_4,     TH_5,    TH_6,     TH_7,    TH_8,     TH_9,     TH_0,        KC_BSPC, \
+  KC_TAB,         KC_H,     KC_Q,     KC_W,     KC_E,     KC_R,    KC_Y,     KC_U,    KC_I,     KC_O,     KC_P,        KC_QUOT, \
+  KC_TAB,         KC_LSFT,  KC_A,     KC_S,     KC_D,     KC_F,    KC_H,     KC_J,    KC_K,     KC_L,     KC_SCLN,     KC_ENT, \
+  KC_LSFT,        KC_Z,     KC_X,     KC_N,     KC_C,     KC_V,    KC_N,     KC_M,    KC_COMM,  KC_DOT,   KC_SLSH,     KC_RSFT, \
+  KC_M,           KC_Y,     KC_LALT,  KC_LCTL,  KC_SPC,   KC_P,    KC_BSPC,  KC_DEL,  KC_DEL,   KC_RALT,  KC_PSCREEN,  TO(_COLEMAK)
 
 // tap-hold settings
 #define TH_DELAY 300
